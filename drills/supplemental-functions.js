@@ -84,7 +84,7 @@ const LinkedListFuncs = {
   },
 };
 
-module.exports = LinkedListFuncs;
+module.exports = { LinkedListFuncs };
 
 // Test the functions
 const { main } = require("./singly-linked-list");
@@ -92,9 +92,9 @@ const { main } = require("./singly-linked-list");
 let SLL = main();
 let emptySLL = new LinkedList();
 
-console.log(LinkedListFuncs.display(SLL));
+// console.log(LinkedListFuncs.display(SLL));
 // console.log(LinkedListFuncs.size(SLL));
 // console.log(LinkedListFuncs.isEmpty(SLL));
 // console.log(LinkedListFuncs.isEmpty(emptySLL));
 // console.log(LinkedListFuncs.findPrevious(SLL, "Kat"));
-console.log(LinkedListFuncs.findLast(SLL));
+// console.log(LinkedListFuncs.findLast(SLL));
