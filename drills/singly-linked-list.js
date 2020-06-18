@@ -28,8 +28,10 @@ const main = () => {
   // Remove Tauhida from the list.
   SLL.remove("Tauhida");
 
-  console.log(SLL);
+  // console.log(SLL);
   return SLL;
 };
 
 main();
+
+module.exports = { main };
