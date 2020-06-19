@@ -27,24 +27,26 @@ console.log(LinkedListFuncs.display(SLL));
 // const reversedExample = reverseLinkedList(SLL);
 // console.log(LinkedListFuncs.display(reversedExample));
 
-// reverse with recursion - switch the direction of all the pointers
-const reverse = (previousNode, currentNode, nextNode) => {
-  // 1. assign currentNode's next value to a temp variable so that we don't lose the list.
-  let temp = nextNode;
-
-  // 2. set currentNode's next value to previousNode
-  //   ERROR HERE - TypeError: Cannot set property 'next' of null
-  currentNode.next = previousNode;
-
-  // base case -
-  // 3. if the temp variable is null (i.e. we've reached the bottom of the list)
-  if (temp === null) {
-    // return currentNode, which is the new head node of the list
-    return currentNode;
+// reverse with recursion - switch the direction of all the pointers https://www.geeksforgeeks.org/recursively-reversing-a-linked-list-a-simple-implementation/
+const reverse = (node) => {
+  // 1. I DON'T UNDERSTAND THIS STEP
+  if (node === null) {
+    return node;
   }
-  // recursive case - not yet reached the end
-  // 4. otherwise, call reverse again and supply currentNode as the previousNode argument, currentNode.next as the currentNode argument, and the temp variable as the nextNode argument
-  reverse(currentNode, currentNode.next, temp);
+  // 2. base case - we are at the end of the linked list?
+  if (node.next === null) {
+    return node;
+  } // 3. recursive case - We have not yet reached the end?
+  else {
+    // create a temp variable to hold recursive output
+    let node1 = reverse(node.next);
+    // make the previous node of the current node as the next node??? THIS PART IS CONFUSING
+    node.next.next = node;
+    // WHY ARE WE SETTING node.next to null?
+    node.next = null;
+    // 4. The output of each recursive call
+    return node1;
+  }
 };
 
 // Copy the list to reverse - Pass by value/reference still gets me!
@@ -52,5 +54,6 @@ let list = SLL;
 console.log(LinkedListFuncs.display(list));
 console.log(list.head);
 
-list.head = reverse(null, list.head, list.head.next);
+// list.head = reverse(null, list.head, list.head.next);
+list.head = reverse(list.head);
 console.log(LinkedListFuncs.display(list));
