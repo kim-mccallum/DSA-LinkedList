@@ -27,28 +27,30 @@ console.log(LinkedListFuncs.display(SLL));
 // const reversedExample = reverseLinkedList(SLL);
 // console.log(LinkedListFuncs.display(reversedExample));
 
-// reverse with recursion
-const reverseLinkedListRecursive = (linkedList) => {
-  // create reverse linked list object to build and return
-  let reversedList = new LinkedList();
+// reverse with recursion - switch the direction of all the pointers
+const reverse = (previousNode, currentNode, nextNode) => {
+  // 1. assign currentNode's next value to a temp variable so that we don't lose the list.
+  let temp = nextNode;
 
-  // start at beginning
-  let currNode = linkedList.head;
-  console.log(currNode);
-  // base case - list has only one item
-  if (currNode.next === null) {
-    // add the node the reversed list and return
-    reversedList.insertFirst(currNode.value);
-    return reversedList;
+  // 2. set currentNode's next value to previousNode
+  //   ERROR HERE - TypeError: Cannot set property 'next' of null
+  currentNode.next = previousNode;
+
+  // base case -
+  // 3. if the temp variable is null (i.e. we've reached the bottom of the list)
+  if (temp === null) {
+    // return currentNode, which is the new head node of the list
+    return currentNode;
   }
-
-  // recursive case - remove the last item and make recursive call
-  // increment
-  currNode = currNode.next;
-  console.log(currNode);
-  // call the function recursively
-  reverseLinkedListRecursive(currNode);
+  // recursive case - not yet reached the end
+  // 4. otherwise, call reverse again and supply currentNode as the previousNode argument, currentNode.next as the currentNode argument, and the temp variable as the nextNode argument
+  reverse(currentNode, currentNode.next, temp);
 };
 
-const reversedExample = reverseLinkedListRecursive(SLL);
-console.log(LinkedListFuncs.display(reversedExample));
+// Copy the list to reverse - Pass by value/reference still gets me!
+let list = SLL;
+console.log(LinkedListFuncs.display(list));
+console.log(list.head);
+
+list.head = reverse(null, list.head, list.head.next);
+console.log(LinkedListFuncs.display(list));
