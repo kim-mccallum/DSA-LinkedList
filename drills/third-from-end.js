@@ -18,5 +18,4 @@ const thirdFromEnd = (linkedList) => {
   }
 };
 
-console.log(LinkedListFuncs.display(SLL));
 console.log(thirdFromEnd(SLL));
