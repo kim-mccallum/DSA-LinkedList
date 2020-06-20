@@ -21,7 +21,7 @@ const reverseLinkedList = (linkedList) => {
 
 let SLL = main();
 
-console.log(LinkedListFuncs.display(SLL));
+// console.log(LinkedListFuncs.display(SLL));
 
 // // Test the function above
 // const reversedExample = reverseLinkedList(SLL);
@@ -29,31 +29,43 @@ console.log(LinkedListFuncs.display(SLL));
 
 // reverse with recursion - switch the direction of all the pointers https://www.geeksforgeeks.org/recursively-reversing-a-linked-list-a-simple-implementation/
 const reverse = (node) => {
-  // 1. I DON'T UNDERSTAND THIS STEP
+  // 1. The case case has two parts - either the node is null
   if (node === null) {
     return node;
   }
-  // 2. base case - we are at the end of the linked list?
+  // 2. or, we are at the end of the linked list
   if (node.next === null) {
     return node;
-  } // 3. recursive case - We have not yet reached the end?
+  } // 3. recursive case - We have not yet reached the end
   else {
-    // create a temp variable to hold recursive output
+    // create a temp variable to hold recursive output - call reverse on the next node
     let node1 = reverse(node.next);
-    // make the previous node of the current node as the next node??? THIS PART IS CONFUSING
+    // reverse the direction of pointers
     node.next.next = node;
-    // WHY ARE WE SETTING node.next to null?
+    // and making this node the end
     node.next = null;
-    // 4. The output of each recursive call
+    // 4. The output after all recursive calls
     return node1;
   }
 };
 
 // Copy the list to reverse - Pass by value/reference still gets me!
-let list = SLL;
-console.log(LinkedListFuncs.display(list));
-console.log(list.head);
+// How to make this object immutable? Use libraries for this?
+// object.freeze?
+// this is still copying the reference
 
-// list.head = reverse(null, list.head, list.head.next);
-list.head = reverse(list.head);
+let list = { ...SLL };
+console.log("list before reversal");
 console.log(LinkedListFuncs.display(list));
+
+// This is pass by reference and will change the original list
+list.head = reverse(list.head);
+console.log("list after reversal");
+console.log(LinkedListFuncs.display(list));
+console.log("SLL after list reversal");
+console.log(LinkedListFuncs.display(SLL));
+
+// Questions for Jeremy
+// 1. Can we talk through how this recursive 'reverse' function works?
+// 2. Pass by value/reference - clear this up in JS and show me how to copy/clone the linked list to prevent mutation
+//

@@ -12,6 +12,7 @@ function WhatDoesThisProgramDo(lst) {
     while (newNode.next !== null) {
       // if there are duplicate/double values, skip them
       if (newNode.next.value === current.value) {
+        // cutting out the duplicate node
         newNode.next = newNode.next.next;
       } else {
         newNode = newNode.next;
@@ -21,7 +22,9 @@ function WhatDoesThisProgramDo(lst) {
   }
 }
 
-// This program is pointless - haha
-// This program iterates over values in a linked list, skipping duplicate/double values.
+// This program removes duplicate/double values from a linked list
 // It doesn't return anything but I guess it could be used to the solve the problem of skipping or removing doubled values?
-// I would have a time complexity of O(n^2)
+// I would have a time complexity of O(n * log(n))
+
+// The inner loop is indeed O(log n).  Here is an article with more details about O(log n): https://stackoverflow.com/questions/2307283/what-does-olog-n-mean-exactly#:~:text=A%20common%20algorithm%20with%20O,constant%20amount%20of%20additional%20work.
+// Putting the inner and out loops together gives you an algorithm with O(n * log n) complexity.
